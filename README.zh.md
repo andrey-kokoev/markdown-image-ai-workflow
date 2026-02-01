@@ -301,3 +301,7 @@ Markdown Image AI Workflow: 设置推荐配置
 [⭐ Star](https://github.com/beiffeng/markdown-image-ai-workflow) | [🐛 报告问题](https://github.com/beiffeng/markdown-image-ai-workflow/issues) | [💬 讨论](https://github.com/beiffeng/markdown-image-ai-workflow/discussions)
 
 </div>
+
+---
+
+中文 | [English](README.md)

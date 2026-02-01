@@ -67,6 +67,8 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
+*.code-workspace
+.history
 
 # 插件特定的临时文件
 test-images/

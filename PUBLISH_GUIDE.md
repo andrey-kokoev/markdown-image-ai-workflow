@@ -1,119 +1,123 @@
-# VSCode插件发布指南
+# VSCode Extension Publishing Guide
 
-## 📋 发布前检查清单
+## 📋 Pre-Publish Checklist
 
-### 🔧 环境准备
-- [ ] 确保已安装最新版本的 `@vscode/vsce`
-- [ ] 拥有有效的Azure DevOps Personal Access Token
-- [ ] 发布者账户：`beifeng`
+### 🔧 Environment Setup
+- [ ] Ensure latest version of `@vscode/vsce` is installed
+- [ ] Have a valid Azure DevOps Personal Access Token
+- [ ] Publisher account: `beifeng`
 
-### 📝 代码质量检查
-- [ ] 运行 `npm run compile` 确保无编译错误
-- [ ] 测试主要功能（至少测试一个图床服务）
-- [ ] 检查README.md文档完整性
-- [ ] 验证package.json版本号正确
+### 📝 Code Quality Checks
+- [ ] Run `npm run compile` to ensure no compilation errors
+- [ ] Test main functionality (test at least one image hosting service)
+- [ ] Check README.md documentation completeness
+- [ ] Verify package.json version number is correct
 
-### 🎨 资源文件检查
-- [ ] 图标文件 `icons/icon.png` 存在且为128x128
-- [ ] 图标在不同主题下显示正常
-- [ ] LICENSE文件完整
+### 🎨 Resource Files Check
+- [ ] Icon file `icons/icon.png` exists and is 128x128
+- [ ] Icon displays correctly in different themes
+- [ ] LICENSE file is complete
 
-## 🚀 发布流程
+## 🚀 Publishing Process
 
-### 方法一：使用一键发布脚本（推荐）
+### Method 1: Use One-Click Publish Script (Recommended)
 ```bash
 ./scripts/publish.sh
 ```
 
-### 方法二：手动发布步骤
+### Method 2: Manual Publishing Steps
 
-#### 1. 登录发布者账户
+#### 1. Login to Publisher Account
 ```bash
 vsce login beifeng
 ```
-> 提示：输入你的Personal Access Token
+> Note: Enter your Personal Access Token when prompted
 
-#### 2. 版本更新（可选）
+#### 2. Version Update (Optional)
 ```bash
-# 补丁版本 (0.1.0 -> 0.1.1)
+# Patch version (0.1.0 -> 0.1.1)
 npm version patch
 
-# 次版本 (0.1.0 -> 0.2.0)  
+# Minor version (0.1.0 -> 0.2.0)  
 npm version minor
 
-# 主版本 (0.1.0 -> 1.0.0)
+# Major version (0.1.0 -> 1.0.0)
 npm version major
 ```
 
-#### 3. 本地打包测试
+#### 3. Local Package Testing
 ```bash
 vsce package
 ```
-检查生成的.vsix文件大小和内容是否合理
+Check if the generated .vsix file size and content are reasonable
 
-#### 4. 发布到市场
+#### 4. Publish to Marketplace
 ```bash
 vsce publish
 ```
 
-#### 5. 推送Git更改
+#### 5. Push Git Changes
 ```bash
 git push origin main
 git push origin --tags
 ```
 
-## 📊 发布后验证
+## 📊 Post-Publish Verification
 
-### 市场验证
-- [ ] 在VSCode市场搜索插件名称
-- [ ] 检查插件页面信息显示正确
-- [ ] 验证图标和描述
-- [ ] 测试从市场安装插件
+### Marketplace Verification
+- [ ] Search for plugin name in VSCode marketplace
+- [ ] Check plugin page information displays correctly
+- [ ] Verify icon and description
+- [ ] Test installing plugin from marketplace
 
-### 功能验证
-- [ ] 安装后插件正常激活
-- [ ] 配置页面可正常访问
-- [ ] 核心功能工作正常
+### Functionality Verification
+- [ ] Plugin activates normally after installation
+- [ ] Configuration page is accessible
+- [ ] Core functionality works properly
 
-## ⚠️ 注意事项
+## ⚠️ Important Notes
 
-### 安全要求
-- **绝不在代码或脚本中硬编码Personal Access Token**
-- 确保敏感配置文件已在.gitignore中排除
-- 发布前检查是否意外包含测试密钥
+### Security Requirements
+- **Never hardcode Personal Access Token in code or scripts**
+- Ensure sensitive configuration files are excluded in .gitignore
+- Check for accidentally included test keys before publishing
 
-### 版本管理
-- 遵循语义化版本控制 (Semantic Versioning)
-- 发布后的版本无法撤销，请谨慎操作
-- 重大变更应该增加主版本号
+### Version Management
+- Follow Semantic Versioning
+- Published versions cannot be undone, proceed with caution
+- Major changes should increase major version number
 
-### 发布频率
-- Bug修复：及时发布补丁版本
-- 新功能：规划好功能集合后发布次版本
-- 重大重构：谨慎规划主版本发布
+### Publishing Frequency
+- Bug fixes: Publish patch version promptly
+- New features: Plan feature sets before publishing minor version
+- Major refactoring: Carefully plan major version releases
 
-## 🔗 有用链接
+## 🔗 Useful Links
 
-- [VSCode扩展市场](https://marketplace.visualstudio.com/)
-- [插件管理页面](https://marketplace.visualstudio.com/manage/publishers/beifeng)
-- [vsce官方文档](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
-- [语义化版本规范](https://semver.org/)
+- [VSCode Extension Marketplace](https://marketplace.visualstudio.com/)
+- [Plugin Management Page](https://marketplace.visualstudio.com/manage/publishers/beifeng)
+- [vsce Official Documentation](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
+- [Semantic Versioning Specification](https://semver.org/)
 
-## 📞 问题排查
+## 📞 Troubleshooting
 
-### 常见发布错误
-1. **图标文件找不到**: 检查icons/icon.png是否存在
-2. **版本兼容性错误**: 确保engines.vscode与@types/vscode版本匹配
-3. **Token验证失败**: 检查Personal Access Token权限和有效期
-4. **文件过大**: 检查.vscodeignore配置，排除不必要文件
+### Common Publishing Errors
+1. **Icon file not found**: Check if icons/icon.png exists
+2. **Version compatibility error**: Ensure engines.vscode matches @types/vscode version
+3. **Token validation failed**: Check Personal Access Token permissions and expiration
+4. **File too large**: Check .vscodeignore configuration, exclude unnecessary files
 
-### 紧急回滚
-如果发布后发现严重问题：
-1. 立即发布修复版本（增加补丁号）
-2. 不要尝试删除已发布版本
-3. 在市场页面添加已知问题说明
+### Emergency Rollback
+If serious issues are found after publishing:
+1. Immediately publish a fix version (increase patch number)
+2. Do not attempt to delete published versions
+3. Add known issues note on marketplace page
 
 ---
 
-📝 **最后更新**: 2025年7月
-🔧 **维护者**: beifeng
+📝 **Last Updated**: July 2025
+🔧 **Maintainer**: beifeng
+
+---
+
+[中文](PUBLISH_GUIDE.zh.md) | English

@@ -115,7 +115,7 @@ If serious issues are found after publishing:
 
 ---
 
-📝 **Last Updated**: July 2025
+📝 **Last Updated**: 2026-02-01
 🔧 **Maintainer**: beifeng
 
 ---

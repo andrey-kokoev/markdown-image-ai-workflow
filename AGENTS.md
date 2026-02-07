@@ -111,18 +111,21 @@ To add a new uploader (e.g., AWS S3):
 ### Interface Template
 
 ```typescript
-export class S3Uploader implements IUploader {
-  async upload(imagePath: string, config: any): Promise<UploadResult> {
-    // Implementation
-    return {
-      url: 'https://...',
-      deleteUrl: 'https://...' // optional
-    };
+export class S3Uploader implements ImageUploader {
+  public readonly name = 's3';
+
+  isConfigured(): boolean {
+    // Check required configuration is available (env vars, settings, etc.)
+    return true;
   }
 
-  validateConfig(config: any): boolean {
-    // Validate required fields
-    return true;
+  async upload(filePath: string): Promise<UploadResult> {
+    // Implementation
+    return {
+      success: true,
+      provider: this.name,
+      // error: 'Error message if upload failed' // optional
+    };
   }
 }
 ```
